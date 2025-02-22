@@ -1,0 +1,84 @@
+package TaskFlow;
+
+import javax.swing.*;
+import java.awt.*;
+import java.util.List;
+
+public class UserInterface {
+    private TaskManager taskManager;
+    private JFrame frame;
+    private DefaultListModel<String> taskListModel;
+    private JList<String> taskList;
+
+    public UserInterface() {
+        taskManager = new TaskManager();
+        taskManager.setTasks(FileManager.loadTasks());
+
+        frame = new JFrame("Gerenciador de Tarefas");
+        frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        frame.setSize(400, 300);
+        frame.setLayout(new BorderLayout());
+
+        taskListModel = new DefaultListModel<>();
+        taskList = new JList<>(taskListModel);
+        atualizarLista();
+
+        JPanel panel = new JPanel();
+        JButton btnAdicionar = new JButton("Adicionar Tarefa");
+        JButton btnConcluir = new JButton("Concluir");
+        JButton btnRemover = new JButton("Remover");
+
+        panel.add(btnAdicionar);
+        panel.add(btnConcluir);
+        panel.add(btnRemover);
+
+        frame.add(new JScrollPane(taskList), BorderLayout.CENTER);
+        frame.add(panel, BorderLayout.SOUTH);
+
+        btnAdicionar.addActionListener(e -> adicionarTarefa());
+        btnConcluir.addActionListener(e -> concluirTarefa());
+        btnRemover.addActionListener(e -> removerTarefa());
+
+        frame.setVisible(true);
+    }
+
+    private void adicionarTarefa() {
+        String titulo = JOptionPane.showInputDialog("Título da Tarefa:");
+        String descricao = JOptionPane.showInputDialog("Descrição:");
+        String prioridade = (String) JOptionPane.showInputDialog(
+                null, "Escolha a prioridade:", "Prioridade",
+                JOptionPane.QUESTION_MESSAGE, null,
+                new String[]{"ALTA", "MÉDIA", "BAIXA"}, "MÉDIA");
+
+        if (titulo != null && prioridade != null) {
+            taskManager.adicionarTarefa(titulo, descricao, prioridade);
+            FileManager.saveTasks(taskManager.getTasks());
+            atualizarLista();
+        }
+    }
+
+    private void concluirTarefa() {
+        int index = taskList.getSelectedIndex();
+        if (index >= 0) {
+            taskManager.concluirTarefa(index);
+            FileManager.saveTasks(taskManager.getTasks());
+            atualizarLista();
+        }
+    }
+
+    private void removerTarefa() {
+        int index = taskList.getSelectedIndex();
+        if (index >= 0) {
+            taskManager.removerTarefa(index);
+            FileManager.saveTasks(taskManager.getTasks());
+            atualizarLista();
+        }
+    }
+
+    private void atualizarLista() {
+        taskListModel.clear();
+        for (Task task : taskManager.getTasks()) {
+            taskListModel.addElement(task.toString());
+        }
+    }
+}
