@@ -58,4 +58,4 @@ Welcome to my **100 Days of Code Challenge** repository! Over the next 100 days,
 ├── 📂 day19-passwordgenerator  # Password Generator
 ├── 📂 day20-rockpaperscissors  # Rock Paper Scissors Game
 ├── 📂 day21-stopwatch          # Stopwatch
-└── README.md                   # Challenge Documentation
+└── README.md   # Challenge Documentation
