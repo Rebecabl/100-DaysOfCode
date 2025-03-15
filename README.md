@@ -1,3 +1,4 @@
+
 #  100 Days of Code - Challenge 
 
 Welcome to my **100 Days of Code Challenge** repository! Over the next 100 days, I will be coding daily, creating projects, and documenting my journey. 
