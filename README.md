@@ -5,11 +5,6 @@
 
 
 
-#  100 Days of Code - Challenge 
-
-Welcome to my **100 Days of Code Challenge** repository! Over the next 100 days, I will be coding daily, creating projects, and documenting my journey. 
-
-
 
 
 
@@ -50,7 +45,7 @@ Welcome to my **100 Days of Code Challenge** repository! Over the next 100 days,
 ## 📂 Repository Structure
 
 ```bash
-📂 100-days-of-code
+📂 
 ├── 📂 day1-taskmanager         # Task Manager CLI
 ├── 📂 day2-taskflow            # Task Manager with GUI
 ├── 📂 day3-tsearch             # TaskMaster Pro - Task Manager with Search and Due Dates
